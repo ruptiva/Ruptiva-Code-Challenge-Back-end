@@ -1,4 +1,8 @@
 pt:
+  devise:
+    failure:
+      user:
+          unauthenticated: 'Você precisa logar para acessar esta página'
   activerecord:
     errors:
       models:
@@ -14,4 +18,3 @@ pt:
         user:
           invalid_session: 'Email ou senha inválidos'
           unauthorized: 'Você precisa logar para acessar esta página'
-
