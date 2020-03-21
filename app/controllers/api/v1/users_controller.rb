@@ -7,14 +7,17 @@ module Api
       before_action :load_user, only: %i[show update destroy]
 
       def index
+        authorize @users
         success_response(data: @users, model: 'User')
       end
 
       def show
+        authorize @user
         success_response(data: @user, model: 'User')
       end
 
       def update
+        authorize @user
         if @user.update(user_params)
           success_response(data: @user, model: 'User')
         else
@@ -23,6 +26,7 @@ module Api
       end
 
       def destroy
+        authorize @user
         @user.destroy
         head :no_content
       end
@@ -38,7 +42,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:first_name, :last_name)
+        params.require(:user).permit(:first_name, :last_name, :role)
       end
     end
   end
