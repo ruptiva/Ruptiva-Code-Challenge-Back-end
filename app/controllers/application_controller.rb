@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user
-    user = User&.find_by(authentication_token: token)
+    user = User&.find_by_authentication_token(token)
     if user && token.present?
       @current_user = user
     else
@@ -31,8 +31,13 @@ class ApplicationController < ActionController::API
   def success_response(data:, model:, includes: '', status: :ok)
     return unless data || model
 
-    render json: data, serializer: "Api::V1::#{model}Serializer".constantize,
-           includes: includes.split(','), status: status
+    if data.respond_to?('each')
+      render json: data, each_serializer: "Api::V1::#{model}Serializer".constantize,
+             includes: includes.split(','), status: status
+    else
+      render json: data, serializer: "Api::V1::#{model}Serializer".constantize,
+             includes: includes.split(','), status: status
+    end
   end
 
   def error_response(data:)
