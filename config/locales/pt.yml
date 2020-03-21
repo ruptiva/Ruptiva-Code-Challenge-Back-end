@@ -1,0 +1,17 @@
+pt:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'Este email já foi usado'
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+        user:
+          invalid_session: 'Email ou senha inválidos'
+          unauthorized: 'Você precisa logar para acessar esta página'
+
