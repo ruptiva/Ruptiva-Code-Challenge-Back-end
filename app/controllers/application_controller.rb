@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json
   delegate :t, to: I18n
 
@@ -25,7 +27,7 @@ class ApplicationController < ActionController::API
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name role])
   end
 
   def success_response(data:, model:, includes: '', status: :ok)
@@ -44,5 +46,10 @@ class ApplicationController < ActionController::API
     return unless data
 
     render json: data.errors, status: :unprocessable_entity
+  end
+
+  def user_not_authorized
+    render json: { erros: t('activerecord.errors.messages.pundit.unauthorized') },
+           status: :unauthorized
   end
 end

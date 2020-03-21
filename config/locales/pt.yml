@@ -2,7 +2,7 @@ pt:
   devise:
     failure:
       user:
-          unauthenticated: 'Você precisa logar para acessar esta página'
+        unauthenticated: 'Você precisa logar para acessar estes dados'
   activerecord:
     errors:
       models:
@@ -17,4 +17,6 @@ pt:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
         user:
           invalid_session: 'Email ou senha inválidos'
-          unauthorized: 'Você precisa logar para acessar esta página'
+          unauthorized: 'Você precisa logar para acessar estes dados'
+        pundit:
+          unauthorized: Você não tem permissões para acessar estes dados
