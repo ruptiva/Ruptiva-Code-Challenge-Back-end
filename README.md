@@ -50,14 +50,14 @@ sudo docker-compose run --rm web_app bundle exec rubocop
 
 ### How to use Application
 
-[if you preffer the postman docs click here](https://documenter.getpostman.com/view/2522711/SzS8sQLA?version=latest)
+[if you preffer the postman docs click here](https://raw.githubusercontent.com/oliveira-andre/Ruptiva-Code-Challenge-Back-end/master/tmp/storage/ruptiva_code_challenge.postman_collection.json)
 
 Registartions
 
 POST create
 
 ```
-curl --location --request POST '/users' \
+curl  --request POST 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users' \
 --header 'Content-Type: application/json' \
 --data-raw '{ 
 	"user":	{ 
@@ -76,7 +76,7 @@ Sessions
 POST create
 
 ```
-curl --location --request POST '/users/sign_in' \
+curl  --request POST 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users/sign_in' \
 --header 'Content-Type: application/json' \
 --data-raw '{ 
 	"user": {
@@ -91,21 +91,21 @@ Users
 GET index
 
 ```
-curl --location --request GET '/users' \
+curl  --request GET 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users' \
 --header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
 ```
 
 GET show
 
 ```
-curl --location --request GET '/users/1' \
+curl  --request GET 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users/1' \
 --header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
 ```
 
 PUT update
 
 ```
-curl --location --request PUT '/users/1' \
+curl  --request PUT 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users/1' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: kkZxYyU3eBXSsXE1Jyb3' \
 --data-raw '{
@@ -119,6 +119,50 @@ curl --location --request PUT '/users/1' \
 DELETE destroy
 
 ```
-curl --location --request DELETE '/users/2' \
+curl  --request DELETE 'https://ruptiva-code-challenge-back-en.herokuapp.com/api/v1/users/2' \
 --header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
+```
+
+### Gems
+
+Active Model Serializer
+
+```
+with the serializer we can manage better the returns of an api
+```
+
+Dotenv rails
+
+```
+with the dotenv i can create the .env file and the application will read it by default
+```
+
+Simple TokenAuthentication
+
+```
+i used this GEM when she was by default on devise, then i used in this application to manage the toke of user (on login)
+```
+
+Factory Bot Rails
+
+```
+this is my prefered factory, i can manage the database of fixures too easy on the factories folder, and the rspec has all compatibility
+```
+
+Ffaker
+
+```
+i use to generate random data with this i can get better and randoms tests
+```
+
+Shoulda matchers
+
+```
+i love the syntax of ruby, and i love to keep it simple and elegant, for this i use this gem to code elegatly and get good tests
+```
+
+Pry-rails
+
+```
+with this gem i can get better responses on rails console, i hate how the irb show the data, for this i prefer to use pry
 ```
