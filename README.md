@@ -1,100 +1,124 @@
-# Ruptiva - Code Challenge Back-end
+# Ruptiva Code Challenge Back-end
 
-## Introdução
+### running application
 
-Este é um desafio utilizado como teste de desenvolvimento Back-end pela Ruptiva.
+download the project
 
-Na empresa, desenvolvemos diversos projetos de aplicativos e sistemas web, portanto, algumas ferramentas são necessárias para manter o desenvolvimento sadio do projeto desde sua fase de planejamento até sua fase de implementação em produção.
-
-Das ferramentas que costumamos utilizar:
-
-- Ruby on Rails
-- Postgresql
-- git
-- Heroku
-- docker-compose
-
-O pessoal do front-end utiliza React e ReactNative.
-
-Neste teste serão avaliados:
-
-- Funcionalidade - todas especificações atendidas
-- Código - o código limpo utilizando boas práticas de desenvolvimento e [estilo](https://github.com/github/rubocop-github/blob/master/STYLEGUIDE.md)
-- Tratamento de exceção - erros retornados pela aplicação estão formatados
-- Commits - realização constante de commits com descrições significativas
-- Documentação
- 
-
-## Requisitos Técnicos
-`Gems` que serão usadas:
-
-- [rails](https://github.com/rails/rails)
-- [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth)
-- [pundit](https://github.com/varvet/pundit)
-- [rspec](https://github.com/rspec/rspec-rails)
-
-Fique à vontade para escolher qualquer versão das gems.
-
-Caso inclua mais gems no seu projeto, deve ser acompanhada de descrição do que a `gem` faz.
-
-
-## Requisitos Funcionais
-Será desenvolvida uma RESTful JSON API em Ruby on Rails com CRUD de usuários, permissões e testes.
-
-#### Usuários
-- Permitir cadastro de usuário (não há necessidade de criação de um usuário por outro usuário)
-- Permitir login através de `email` e `password`
-- Permitir visualização de usuário
-- Permitir update de usuários
-- Permitir listar usuários
-- Permitir exclusão de usuário por soft-delete
-
-##### Observações
-- O model `User` deve conter um campo `role`, com opções `user` e `admin`, default `user`.
-- Considerar a seguinte estrutura JSON abaixo: 
 ```
-{
-  "first_name": "João",
-  "last_name": "da Silva",
-  "email": "joao@email.com",
-  "password": "12345678",
-  "password_confirmation": "12345678"
-}
+git clone https://github.com/oliveira-andre/Ruptiva-Code-Challenge-Back-end.git
 ```
 
-#### Permissões
-- Impedir que usuários não autenticados acessem qualquer informação
-- Usuários `admin` tem acesso a todos registros
-- Usuários `user` tem acesso somente ao seu próprio registro
+create a dotenv file
 
-#### Testes
-Os testes devem ser executados utilizando [rspec](https://github.com/rspec/rspec-rails) e devem compreender:
-
-- Testes de model
-- Testes de request
-- O que julgar necessário
-
-#### Seed
-Popular os dados do usuário administrador usando `db/seeds.rb`
 ```
-{
-  "first_name": "Maikel",
-  "last_name": "Bald",
-  "email": "maikel@ruptiva.com",
-  "password": "ilikeruptiva",
-  "role": "admin"
-}
+touch .env
 ```
 
-#### Documentação
-O sistema de login e os demais endpoints devem ser documentados.
+put this code
 
-Utilize postman, apiary, swagger, blueprint ou alguma ferramenta para te auxiliar nesta tarefa.
+```
+db_host=postgres
+db_port=5432
+db_user=postgres
+db_pass=root
+```
 
+run the application using docker
 
-## Entrega
-- Criar um repositório público ou privado para avaliação do time Ruptiva
-- Criar um `README.md` no repositório com informações de como rodar a aplicação desenvolvida
-- A partir do momento que você recebeu este teste, tem 7 dias corridos para execução do teste. Caso não consiga entregar no prazo, avise com antecedência
-- O contato deve ser feito pelo do e-mail maikel@ruptiva.com
+```
+sudo docker-compose up --build
+```
 
+create and migrate the database
+
+```
+sudo docker-compose run --rm web_app bundle exec rails db:create db:migrate db:seed
+```
+
+and right now you are able to run the application
+
+if you would like to run the test
+
+```
+sudo docker-compose run --rm web_app bundle exec rspec
+```
+
+and if you want see the rubocop offenses
+```
+sudo docker-compose run --rm web_app bundle exec rubocop
+```
+
+### How to use Application
+
+[if you preffer the postman docs click here](https://documenter.getpostman.com/view/2522711/SzS8sQLA?version=latest)
+
+Registartions
+
+POST create
+
+```
+curl --location --request POST '/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{ 
+	"user":	{ 
+		"first_name": "Andre",
+		"last_name": "Oliveira",
+		"email": "safe@root.com",
+		"role": "admin",
+		"password": "123456",
+		"password_confirmation": "123456"
+	}
+}'
+```
+
+Sessions
+
+POST create
+
+```
+curl --location --request POST '/users/sign_in' \
+--header 'Content-Type: application/json' \
+--data-raw '{ 
+	"user": {
+		"email": "root@root.com",
+		"password": "123456"
+	}
+}'
+```
+
+Users
+
+GET index
+
+```
+curl --location --request GET '/users' \
+--header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
+```
+
+GET show
+
+```
+curl --location --request GET '/users/1' \
+--header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
+```
+
+PUT update
+
+```
+curl --location --request PUT '/users/1' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: kkZxYyU3eBXSsXE1Jyb3' \
+--data-raw '{
+	"user": {
+		"first_name": "andre",
+		"role": "admin"
+	}
+}'
+```
+
+DELETE destroy
+
+```
+curl --location --request DELETE '/users/2' \
+--header 'Authorization: kkZxYyU3eBXSsXE1Jyb3'
+```
