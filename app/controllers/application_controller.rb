@@ -49,7 +49,8 @@ class ApplicationController < ActionController::API
   end
 
   def user_not_authorized
-    render json: { erros: t('activerecord.errors.messages.pundit.unauthorized') },
-           status: :unauthorized
+    render json: {
+      errors: t('activerecord.errors.messages.pundit.unauthorized')
+    }, status: :unauthorized
   end
 end
