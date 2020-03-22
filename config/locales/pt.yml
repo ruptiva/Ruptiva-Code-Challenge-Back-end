@@ -4,12 +4,25 @@ pt:
       user:
         unauthenticated: 'Você precisa logar para acessar estes dados'
   activerecord:
+    models:
+      user:
+        attributes:
+          password: Senha
+          first_name: Primeiro Nome
+          last_name: Ultimo Nome
     errors:
       models:
         user:
           attributes:
             email:
               taken: 'Este email já foi usado'
+              blank: 'Email não pode ficar em branco'
+            password:
+              blank: 'Senha não pode ficar em branco'
+            first_name:
+              blank: 'Primeiro Nome não pode ficar em branco'
+            last_name:
+              blank: 'Ultimo nome não pode ficar em branco'
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
