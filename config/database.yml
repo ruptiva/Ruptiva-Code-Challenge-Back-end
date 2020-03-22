@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['db_host'] %>
+  port: <%= ENV['db_port'] %>
+  username: <%= ENV['db_user'] %>
+  password: <%= ENV['db_pass'] %>
+
+development:
+  <<: *default
+  database: Ruptiva_Code_Challenge_Back_end_development
+
+test:
+  <<: *default
+  database: Ruptiva_Code_Challenge_Back_end_test
+
+production:
+  <<: *default
+  database: Ruptiva_Code_Challenge_Back_end_production
