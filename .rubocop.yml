@@ -28,6 +28,7 @@ AllCops:
     - 'config/environments/*'
     - 'test/channels/application_cable/*'
     - 'test/test_helper.rb'
+    - 'config/initializers/*'
 
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
