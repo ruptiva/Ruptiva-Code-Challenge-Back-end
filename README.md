@@ -96,5 +96,5 @@ Utilize postman, apiary, swagger, blueprint ou alguma ferramenta para te auxilia
 - Criar um repositório público ou privado para avaliação do time Ruptiva
 - Criar um `README.md` no repositório com informações de como rodar a aplicação desenvolvida
 - A partir do momento que você recebeu este teste, tem 7 dias corridos para execução do teste. Caso não consiga entregar no prazo, avise com antecedência
-- O contato deve ser feito pelo do e-mail maikel@ruptiva.com
+- O contato deve ser feito pelo do e-mail cleimar@ruptiva.com
 
